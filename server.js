@@ -179,16 +179,16 @@ app.get('/post/:blogid', async (req, res) => {
 app.delete('/post/:blogid', async (req, res) => {
     const { blogid } = req.params;
     try {
-      const [result] = await pool.query('DELETE FROM blog WHERE blogid = ?', [blogid]);
-      if (result.affectedRows === 0) {
+    const [result] = await pool.query('DELETE FROM blog WHERE blogid = ?', [blogid]);
+    if (result.affectedRows === 0) {
         return res.status(404).json({ message: 'Blog not found' });
-      }
-      return res.json({ message: 'Blog deleted successfully' });
+    }
+    return res.json({ message: 'Blog deleted successfully' });
     } catch (err) {
       console.error("Error executing SQL: ", err); // ตรวจสอบข้อผิดพลาด SQL
-      return res.status(500).json({ message: 'Error deleting the blog', error: err });
+    return res.status(500).json({ message: 'Error deleting the blog', error: err });
     }
-  });
+});
 
 // แก้ไขข้อมูล blog
 app.put('/post/:blogid', async (req, res) => {
